@@ -1,0 +1,451 @@
+   1               		.file	"rios.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	__vector_23
+  18               	__vector_23:
+  19               	.LFB8:
+  20               	.LM1:
+  21 0000 1F92      		push __zero_reg__
+  22 0002 0F92      		push r0
+  23 0004 0FB6      		in r0,__SREG__
+  24 0006 0F92      		push r0
+  25 0008 0BB6      		in r0,91-32
+  26 000a 0F92      		push r0
+  27 000c 1124      		clr __zero_reg__
+  28 000e 9F92      		push r9
+  29 0010 AF92      		push r10
+  30 0012 BF92      		push r11
+  31 0014 CF92      		push r12
+  32 0016 DF92      		push r13
+  33 0018 EF92      		push r14
+  34 001a FF92      		push r15
+  35 001c 0F93      		push r16
+  36 001e 1F93      		push r17
+  37 0020 2F93      		push r18
+  38 0022 3F93      		push r19
+  39 0024 4F93      		push r20
+  40 0026 5F93      		push r21
+  41 0028 6F93      		push r22
+  42 002a 7F93      		push r23
+  43 002c 8F93      		push r24
+  44 002e 9F93      		push r25
+  45 0030 AF93      		push r26
+  46 0032 BF93      		push r27
+  47 0034 CF93      		push r28
+  48 0036 DF93      		push r29
+  49 0038 EF93      		push r30
+  50 003a FF93      		push r31
+  51               	/* prologue: Signal */
+  52               	/* frame size = 0 */
+  53               	.LM2:
+  54 003c BB24      		clr r11
+  55               	.LVL0:
+  56               	.LM3:
+  57 003e 8DE0      		ldi r24,lo8(13)
+  58 0040 C82E      		mov r12,r24
+  59 0042 D12C      		mov r13,__zero_reg__
+  60               	.LM4:
+  61 0044 9924      		clr r9
+  62 0046 9394      		inc r9
+  63               	.LM5:
+  64 0048 AA24      		clr r10
+  65 004a AA94      		dec r10
+  66 004c 00C0      		rjmp .L2
+  67               	.L4:
+  68               	.LM6:
+  69 004e EC9C      		mul r14,r12
+  70 0050 E001      		movw r28,r0
+  71 0052 ED9C      		mul r14,r13
+  72 0054 D00D      		add r29,r0
+  73 0056 FC9C      		mul r15,r12
+  74 0058 D00D      		add r29,r0
+  75 005a 1124      		clr r1
+  76 005c C050      		subi r28,lo8(-(tasks))
+  77 005e D040      		sbci r29,hi8(-(tasks))
+  78 0060 2D81      		ldd r18,Y+5
+  79 0062 3E81      		ldd r19,Y+6
+  80 0064 4F81      		ldd r20,Y+7
+  81 0066 5885      		ldd r21,Y+8
+  82 0068 8981      		ldd r24,Y+1
+  83 006a 9A81      		ldd r25,Y+2
+  84 006c AB81      		ldd r26,Y+3
+  85 006e BC81      		ldd r27,Y+4
+  86 0070 2817      		cp r18,r24
+  87 0072 3907      		cpc r19,r25
+  88 0074 4A07      		cpc r20,r26
+  89 0076 5B07      		cpc r21,r27
+  90 0078 00F4      		brsh .+2
+  91 007a 00C0      		rjmp .L3
+  92 007c 9091 0000 		lds r25,currentTask
+  93 0080 E92F      		mov r30,r25
+  94 0082 F0E0      		ldi r31,lo8(0)
+  95 0084 E050      		subi r30,lo8(-(runningTasks))
+  96 0086 F040      		sbci r31,hi8(-(runningTasks))
+  97 0088 8081      		ld r24,Z
+  98 008a B816      		cp r11,r24
+  99 008c 00F0      		brlo .+2
+ 100 008e 00C0      		rjmp .L3
+ 101 0090 8881      		ld r24,Y
+ 102 0092 8823      		tst r24
+ 103 0094 01F0      		breq .+2
+ 104 0096 00C0      		rjmp .L3
+ 105               	.LM7:
+ 106               	/* #APP */
+ 107               	 ;  46 "rios/rios.c" 1
+ 108 0098 F894      		cli
+ 109               	 ;  0 "" 2
+ 110               	.LM8:
+ 111               	/* #NOAPP */
+ 112 009a EC9C      		mul r14,r12
+ 113 009c F001      		movw r30,r0
+ 114 009e ED9C      		mul r14,r13
+ 115 00a0 F00D      		add r31,r0
+ 116 00a2 FC9C      		mul r15,r12
+ 117 00a4 F00D      		add r31,r0
+ 118 00a6 1124      		clr r1
+ 119 00a8 E050      		subi r30,lo8(-(tasks))
+ 120 00aa F040      		sbci r31,hi8(-(tasks))
+ 121 00ac 1582      		std Z+5,__zero_reg__
+ 122 00ae 1682      		std Z+6,__zero_reg__
+ 123 00b0 1782      		std Z+7,__zero_reg__
+ 124 00b2 1086      		std Z+8,__zero_reg__
+ 125               	.LM9:
+ 126 00b4 9082      		st Z,r9
+ 127               	.LM10:
+ 128 00b6 E92F      		mov r30,r25
+ 129 00b8 EF5F      		subi r30,lo8(-(1))
+ 130 00ba E093 0000 		sts currentTask,r30
+ 131               	.LM11:
+ 132 00be F0E0      		ldi r31,lo8(0)
+ 133 00c0 E050      		subi r30,lo8(-(runningTasks))
+ 134 00c2 F040      		sbci r31,hi8(-(runningTasks))
+ 135 00c4 B082      		st Z,r11
+ 136               	.LM12:
+ 137               	/* #APP */
+ 138               	 ;  51 "rios/rios.c" 1
+ 139 00c6 7894      		sei
+ 140               	 ;  0 "" 2
+ 141               	.LM13:
+ 142               	/* #NOAPP */
+ 143 00c8 EC9C      		mul r14,r12
+ 144 00ca 8001      		movw r16,r0
+ 145 00cc ED9C      		mul r14,r13
+ 146 00ce 100D      		add r17,r0
+ 147 00d0 FC9C      		mul r15,r12
+ 148 00d2 100D      		add r17,r0
+ 149 00d4 1124      		clr r1
+ 150 00d6 0050      		subi r16,lo8(-(tasks))
+ 151 00d8 1040      		sbci r17,hi8(-(tasks))
+ 152 00da D801      		movw r26,r16
+ 153 00dc 1996      		adiw r26,9
+ 154 00de ED91      		ld r30,X+
+ 155 00e0 FC91      		ld r31,X
+ 156 00e2 1A97      		sbiw r26,9+1
+ 157 00e4 1B96      		adiw r26,11
+ 158 00e6 8D91      		ld r24,X+
+ 159 00e8 9C91      		ld r25,X
+ 160 00ea 1C97      		sbiw r26,11+1
+ 161 00ec 0995      		icall
+ 162 00ee F801      		movw r30,r16
+ 163 00f0 9487      		std Z+12,r25
+ 164 00f2 8387      		std Z+11,r24
+ 165               	.LM14:
+ 166               	/* #APP */
+ 167               	 ;  55 "rios/rios.c" 1
+ 168 00f4 F894      		cli
+ 169               	 ;  0 "" 2
+ 170               	.LM15:
+ 171               	/* #NOAPP */
+ 172 00f6 EC9C      		mul r14,r12
+ 173 00f8 F001      		movw r30,r0
+ 174 00fa ED9C      		mul r14,r13
+ 175 00fc F00D      		add r31,r0
+ 176 00fe FC9C      		mul r15,r12
+ 177 0100 F00D      		add r31,r0
+ 178 0102 1124      		clr r1
+ 179 0104 E050      		subi r30,lo8(-(tasks))
+ 180 0106 F040      		sbci r31,hi8(-(tasks))
+ 181 0108 1082      		st Z,__zero_reg__
+ 182               	.LM16:
+ 183 010a 8091 0000 		lds r24,currentTask
+ 184 010e E82F      		mov r30,r24
+ 185 0110 F0E0      		ldi r31,lo8(0)
+ 186 0112 E050      		subi r30,lo8(-(runningTasks))
+ 187 0114 F040      		sbci r31,hi8(-(runningTasks))
+ 188 0116 A082      		st Z,r10
+ 189               	.LM17:
+ 190 0118 8150      		subi r24,lo8(-(-1))
+ 191 011a 8093 0000 		sts currentTask,r24
+ 192               	.LM18:
+ 193               	/* #APP */
+ 194               	 ;  59 "rios/rios.c" 1
+ 195 011e 7894      		sei
+ 196               	 ;  0 "" 2
+ 197               	/* #NOAPP */
+ 198               	.L3:
+ 199               	.LM19:
+ 200 0120 EC9C      		mul r14,r12
+ 201 0122 F001      		movw r30,r0
+ 202 0124 ED9C      		mul r14,r13
+ 203 0126 F00D      		add r31,r0
+ 204 0128 FC9C      		mul r15,r12
+ 205 012a F00D      		add r31,r0
+ 206 012c 1124      		clr r1
+ 207 012e E050      		subi r30,lo8(-(tasks))
+ 208 0130 F040      		sbci r31,hi8(-(tasks))
+ 209 0132 8581      		ldd r24,Z+5
+ 210 0134 9681      		ldd r25,Z+6
+ 211 0136 A781      		ldd r26,Z+7
+ 212 0138 B085      		ldd r27,Z+8
+ 213 013a 0196      		adiw r24,1
+ 214 013c A11D      		adc r26,__zero_reg__
+ 215 013e B11D      		adc r27,__zero_reg__
+ 216 0140 8583      		std Z+5,r24
+ 217 0142 9683      		std Z+6,r25
+ 218 0144 A783      		std Z+7,r26
+ 219 0146 B087      		std Z+8,r27
+ 220               	.LM20:
+ 221 0148 B394      		inc r11
+ 222               	.L2:
+ 223 014a EB2C      		mov r14,r11
+ 224 014c FF24      		clr r15
+ 225 014e 8091 0000 		lds r24,tasksNum
+ 226 0152 9927      		clr r25
+ 227 0154 87FD      		sbrc r24,7
+ 228 0156 9095      		com r25
+ 229 0158 8E15      		cp r24,r14
+ 230 015a 9F05      		cpc r25,r15
+ 231 015c 04F0      		brlt .+2
+ 232 015e 00C0      		rjmp .L4
+ 233               	/* epilogue start */
+ 234               	.LM21:
+ 235 0160 FF91      		pop r31
+ 236 0162 EF91      		pop r30
+ 237 0164 DF91      		pop r29
+ 238 0166 CF91      		pop r28
+ 239 0168 BF91      		pop r27
+ 240 016a AF91      		pop r26
+ 241 016c 9F91      		pop r25
+ 242 016e 8F91      		pop r24
+ 243 0170 7F91      		pop r23
+ 244 0172 6F91      		pop r22
+ 245 0174 5F91      		pop r21
+ 246 0176 4F91      		pop r20
+ 247 0178 3F91      		pop r19
+ 248 017a 2F91      		pop r18
+ 249 017c 1F91      		pop r17
+ 250 017e 0F91      		pop r16
+ 251 0180 FF90      		pop r15
+ 252 0182 EF90      		pop r14
+ 253 0184 DF90      		pop r13
+ 254 0186 CF90      		pop r12
+ 255 0188 BF90      		pop r11
+ 256               	.LVL1:
+ 257 018a AF90      		pop r10
+ 258 018c 9F90      		pop r9
+ 259 018e 0F90      		pop r0
+ 260 0190 0BBE      		out 91-32,r0
+ 261 0192 0F90      		pop r0
+ 262 0194 0FBE      		out __SREG__,r0
+ 263 0196 0F90      		pop r0
+ 264 0198 1F90      		pop __zero_reg__
+ 265 019a 1895      		reti
+ 266               	.LFE8:
+ 268               	.global	os_init_scheduler
+ 270               	os_init_scheduler:
+ 271               	.LFB9:
+ 272               	.LM22:
+ 273               	/* prologue: function */
+ 274               	/* frame size = 0 */
+ 275               	.LM23:
+ 276 019c 83E8      		ldi r24,lo8(-125)
+ 277 019e 84BD      		out 68-32,r24
+ 278               	.LM24:
+ 279 01a0 85B5      		in r24,69-32
+ 280 01a2 8360      		ori r24,lo8(3)
+ 281 01a4 85BD      		out 69-32,r24
+ 282               	.LM25:
+ 283 01a6 81E0      		ldi r24,lo8(1)
+ 284 01a8 8093 6E00 		sts 110,r24
+ 285               	.LM26:
+ 286 01ac 16BC      		out 70-32,__zero_reg__
+ 287               	.LM27:
+ 288 01ae 8FEF      		ldi r24,lo8(-1)
+ 289 01b0 87BD      		out 71-32,r24
+ 290               	/* epilogue start */
+ 291               	.LM28:
+ 292 01b2 0895      		ret
+ 293               	.LFE9:
+ 295               	.global	os_led_brightness
+ 297               	os_led_brightness:
+ 298               	.LFB10:
+ 299               	.LM29:
+ 300               	.LVL2:
+ 301               	/* prologue: function */
+ 302               	/* frame size = 0 */
+ 303               	.LM30:
+ 304 01b4 8823      		tst r24
+ 305 01b6 01F0      		breq .L9
+ 306               	.LM31:
+ 307 01b8 87BD      		out 71-32,r24
+ 308               	.LM32:
+ 309 01ba 279A      		sbi 36-32,7
+ 310 01bc 0895      		ret
+ 311               	.L9:
+ 312               	.LM33:
+ 313 01be 2798      		cbi 36-32,7
+ 314 01c0 0895      		ret
+ 315               	.LFE10:
+ 317               	.global	os_add_task
+ 319               	os_add_task:
+ 320               	.LFB11:
+ 321               	.LM34:
+ 322               	.LVL3:
+ 323 01c2 EF92      		push r14
+ 324 01c4 FF92      		push r15
+ 325 01c6 0F93      		push r16
+ 326 01c8 1F93      		push r17
+ 327 01ca CF93      		push r28
+ 328 01cc DF93      		push r29
+ 329               	/* prologue: function */
+ 330               	/* frame size = 0 */
+ 331 01ce 7C01      		movw r14,r24
+ 332 01d0 8901      		movw r16,r18
+ 333               	.LM35:
+ 334 01d2 8091 0000 		lds r24,tasksNum
+ 335               	.LVL4:
+ 336 01d6 C82F      		mov r28,r24
+ 337 01d8 DD27      		clr r29
+ 338 01da C7FD      		sbrc r28,7
+ 339 01dc D095      		com r29
+ 340               	.LVL5:
+ 341 01de 2196      		adiw r28,1
+ 342               	.LM36:
+ 343 01e0 CA30      		cpi r28,10
+ 344 01e2 D105      		cpc r29,__zero_reg__
+ 345 01e4 04F0      		brlt .L13
+ 346               	.LVL6:
+ 347 01e6 CFEF      		ldi r28,lo8(-1)
+ 348 01e8 DFEF      		ldi r29,hi8(-1)
+ 349 01ea 00C0      		rjmp .L14
+ 350               	.L13:
+ 351               	.LM37:
+ 352 01ec CB01      		movw r24,r22
+ 353 01ee BA01      		movw r22,r20
+ 354 01f0 0E94 0000 		call __floatunsisf
+ 355               	.LVL7:
+ 356 01f4 25E7      		ldi r18,lo8(0x3efa0275)
+ 357 01f6 32E0      		ldi r19,hi8(0x3efa0275)
+ 358 01f8 4AEF      		ldi r20,hlo8(0x3efa0275)
+ 359 01fa 5EE3      		ldi r21,hhi8(0x3efa0275)
+ 360 01fc 0E94 0000 		call __mulsf3
+ 361 0200 20E0      		ldi r18,lo8(0x3f000000)
+ 362 0202 30E0      		ldi r19,hi8(0x3f000000)
+ 363 0204 40E0      		ldi r20,hlo8(0x3f000000)
+ 364 0206 5FE3      		ldi r21,hhi8(0x3f000000)
+ 365 0208 0E94 0000 		call __addsf3
+ 366 020c 0E94 0000 		call __fixunssfsi
+ 367 0210 2DE0      		ldi r18,lo8(13)
+ 368 0212 30E0      		ldi r19,hi8(13)
+ 369 0214 C29F      		mul r28,r18
+ 370 0216 F001      		movw r30,r0
+ 371 0218 C39F      		mul r28,r19
+ 372 021a F00D      		add r31,r0
+ 373 021c D29F      		mul r29,r18
+ 374 021e F00D      		add r31,r0
+ 375 0220 1124      		clr r1
+ 376 0222 E050      		subi r30,lo8(-(tasks))
+ 377 0224 F040      		sbci r31,hi8(-(tasks))
+ 378 0226 6183      		std Z+1,r22
+ 379 0228 7283      		std Z+2,r23
+ 380 022a 8383      		std Z+3,r24
+ 381 022c 9483      		std Z+4,r25
+ 382               	.LM38:
+ 383 022e 6583      		std Z+5,r22
+ 384 0230 7683      		std Z+6,r23
+ 385 0232 8783      		std Z+7,r24
+ 386 0234 9087      		std Z+8,r25
+ 387               	.LM39:
+ 388 0236 1082      		st Z,__zero_reg__
+ 389               	.LM40:
+ 390 0238 F286      		std Z+10,r15
+ 391 023a E186      		std Z+9,r14
+ 392               	.LM41:
+ 393 023c 1487      		std Z+12,r17
+ 394 023e 0387      		std Z+11,r16
+ 395               	.LM42:
+ 396 0240 C093 0000 		sts tasksNum,r28
+ 397               	.LVL8:
+ 398               	.L14:
+ 399               	.LM43:
+ 400 0244 CE01      		movw r24,r28
+ 401               	.LVL9:
+ 402               	/* epilogue start */
+ 403 0246 DF91      		pop r29
+ 404 0248 CF91      		pop r28
+ 405 024a 1F91      		pop r17
+ 406 024c 0F91      		pop r16
+ 407               	.LVL10:
+ 408 024e FF90      		pop r15
+ 409 0250 EF90      		pop r14
+ 410               	.LVL11:
+ 411 0252 0895      		ret
+ 412               	.LFE11:
+ 414               	.global	tasksNum
+ 415               		.data
+ 418               	tasksNum:
+ 419 0000 FF        		.byte	-1
+ 420               	.global	runningTasks
+ 423               	runningTasks:
+ 424 0001 FF        		.byte	-1
+ 425 0002 0000 0000 		.skip 10,0
+ 425      0000 0000 
+ 425      0000 
+ 426               	.global	idleTask
+ 429               	idleTask:
+ 430 000c FF        		.byte	-1
+ 431 000d 00        		.byte	0
+ 432 000e 00        		.byte	0
+ 433 000f 00        		.byte	0
+ 434               	.global	currentTask
+ 435               	.global	currentTask
+ 436               		.section .bss
+ 439               	currentTask:
+ 440 0000 00        		.skip 1,0
+ 441               	.global	schedule_time
+ 442               	.global	schedule_time
+ 445               	schedule_time:
+ 446 0001 0000      		.skip 2,0
+ 447               		.comm tasks,130,1
+ 496               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 rios.c
+C:\Users\Owen\AppData\Local\Temp/ccw8gH0h.s:2      *ABS*:0000003f __SREG__
+C:\Users\Owen\AppData\Local\Temp/ccw8gH0h.s:3      *ABS*:0000003e __SP_H__
+C:\Users\Owen\AppData\Local\Temp/ccw8gH0h.s:4      *ABS*:0000003d __SP_L__
+C:\Users\Owen\AppData\Local\Temp/ccw8gH0h.s:5      *ABS*:00000034 __CCP__
+C:\Users\Owen\AppData\Local\Temp/ccw8gH0h.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Owen\AppData\Local\Temp/ccw8gH0h.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Owen\AppData\Local\Temp/ccw8gH0h.s:18     .text:00000000 __vector_23
+                            *COM*:00000082 tasks
+C:\Users\Owen\AppData\Local\Temp/ccw8gH0h.s:439    .bss:00000000 currentTask
+C:\Users\Owen\AppData\Local\Temp/ccw8gH0h.s:423    .data:00000001 runningTasks
+C:\Users\Owen\AppData\Local\Temp/ccw8gH0h.s:418    .data:00000000 tasksNum
+C:\Users\Owen\AppData\Local\Temp/ccw8gH0h.s:270    .text:0000019c os_init_scheduler
+C:\Users\Owen\AppData\Local\Temp/ccw8gH0h.s:297    .text:000001b4 os_led_brightness
+C:\Users\Owen\AppData\Local\Temp/ccw8gH0h.s:319    .text:000001c2 os_add_task
+C:\Users\Owen\AppData\Local\Temp/ccw8gH0h.s:429    .data:0000000c idleTask
+C:\Users\Owen\AppData\Local\Temp/ccw8gH0h.s:445    .bss:00000001 schedule_time
+
+UNDEFINED SYMBOLS
+__floatunsisf
+__mulsf3
+__addsf3
+__fixunssfsi
+__do_copy_data
+__do_clear_bss

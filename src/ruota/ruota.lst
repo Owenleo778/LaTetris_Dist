@@ -1,0 +1,469 @@
+   1               		.file	"ruota.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               	.global	scan_encoder
+  18               	scan_encoder:
+  19               	.LFB3:
+  20               	.LM1:
+  21               	.LVL0:
+  22               	/* prologue: function */
+  23               	/* frame size = 0 */
+  24 0000 482F      		mov r20,r24
+  25               	.LM2:
+  26               	/* #APP */
+  27               	 ;  66 "ruota/ruota.c" 1
+  28 0002 F894      		cli
+  29               	 ;  0 "" 2
+  30               	.LM3:
+  31               	/* #NOAPP */
+  32 0004 8CB1      		in r24,44-32
+  33               	.LVL1:
+  34               	.LM4:
+  35 0006 85FD      		sbrc r24,5
+  36 0008 00C0      		rjmp .L2
+  37               	.LVL2:
+  38 000a 30E0      		ldi r19,lo8(0)
+  39               	.LVL3:
+  40 000c 00C0      		rjmp .L3
+  41               	.LVL4:
+  42               	.L2:
+  43 000e 33E0      		ldi r19,lo8(3)
+  44               	.LVL5:
+  45               	.L3:
+  46               	.LM5:
+  47 0010 84FF      		sbrs r24,4
+  48 0012 00C0      		rjmp .L4
+  49               	.LM6:
+  50 0014 81E0      		ldi r24,lo8(1)
+  51 0016 3827      		eor r19,r24
+  52               	.L4:
+  53               	.LM7:
+  54 0018 2091 0000 		lds r18,last.1273
+  55 001c 231B      		sub r18,r19
+  56               	.LM8:
+  57 001e 20FF      		sbrs r18,0
+  58 0020 00C0      		rjmp .L5
+  59               	.LM9:
+  60 0022 3093 0000 		sts last.1273,r19
+  61               	.LM10:
+  62 0026 8091 0000 		lds r24,delta
+  63 002a 8150      		subi r24,lo8(-(-1))
+  64 002c 2270      		andi r18,lo8(2)
+  65 002e 820F      		add r24,r18
+  66 0030 8093 0000 		sts delta,r24
+  67               	.L5:
+  68               	.LM11:
+  69               	/* #APP */
+  70               	 ;  77 "ruota/ruota.c" 1
+  71 0034 7894      		sei
+  72               	 ;  0 "" 2
+  73               	.LM12:
+  74               	/* #NOAPP */
+  75 0036 842F      		mov r24,r20
+  76               	/* epilogue start */
+  77 0038 0895      		ret
+  78               	.LFE3:
+  80               	.global	os_enc_delta
+  82               	os_enc_delta:
+  83               	.LFB4:
+  84               	.LM13:
+  85               	/* prologue: function */
+  86               	/* frame size = 0 */
+  87               	.LM14:
+  88               	/* #APP */
+  89               	 ;  89 "ruota/ruota.c" 1
+  90 003a F894      		cli
+  91               	 ;  0 "" 2
+  92               	.LM15:
+  93               	/* #NOAPP */
+  94 003c 8091 0000 		lds r24,delta
+  95               	.LVL6:
+  96               	.LM16:
+  97 0040 9091 0000 		lds r25,delta
+  98 0044 9170      		andi r25,lo8(1)
+  99 0046 9093 0000 		sts delta,r25
+ 100               	.LM17:
+ 101               	/* #APP */
+ 102               	 ;  92 "ruota/ruota.c" 1
+ 103 004a 7894      		sei
+ 104               	 ;  0 "" 2
+ 105               	.LM18:
+ 106               	/* #NOAPP */
+ 107 004c 8595      		asr r24
+ 108               	.LVL7:
+ 109               	/* epilogue start */
+ 110 004e 0895      		ret
+ 111               	.LFE4:
+ 113               	.global	scan_switches
+ 115               	scan_switches:
+ 116               	.LFB5:
+ 117               	.LM19:
+ 118               	.LVL8:
+ 119               	/* prologue: function */
+ 120               	/* frame size = 0 */
+ 121 0050 AC01      		movw r20,r24
+ 122               	.LVL9:
+ 123               	.LM20:
+ 124               	/* #APP */
+ 125               	 ;  103 "ruota/ruota.c" 1
+ 126 0052 F894      		cli
+ 127               	 ;  0 "" 2
+ 128               	.LM21:
+ 129               	/* #NOAPP */
+ 130 0054 3091 0000 		lds r19,switch_state
+ 131 0058 86B1      		in r24,38-32
+ 132 005a 2CB1      		in r18,44-32
+ 133               	.LVL10:
+ 134 005c 93B1      		in r25,35-32
+ 135 005e 2F67      		ori r18,lo8(127)
+ 136 0060 806C      		ori r24,lo8(-64)
+ 137 0062 2823      		and r18,r24
+ 138 0064 9F6B      		ori r25,lo8(-65)
+ 139 0066 2923      		and r18,r25
+ 140 0068 2095      		com r18
+ 141 006a 2327      		eor r18,r19
+ 142               	.LM22:
+ 143 006c 8091 0000 		lds r24,ct0.1305
+ 144 0070 8223      		and r24,r18
+ 145 0072 8095      		com r24
+ 146 0074 8093 0000 		sts ct0.1305,r24
+ 147               	.LM23:
+ 148 0078 9091 0000 		lds r25,ct1.1306
+ 149 007c 9223      		and r25,r18
+ 150 007e 9827      		eor r25,r24
+ 151 0080 9093 0000 		sts ct1.1306,r25
+ 152               	.LM24:
+ 153 0084 8223      		and r24,r18
+ 154               	.LVL11:
+ 155 0086 8923      		and r24,r25
+ 156               	.LM25:
+ 157 0088 9091 0000 		lds r25,switch_state
+ 158 008c 9827      		eor r25,r24
+ 159 008e 9093 0000 		sts switch_state,r25
+ 160               	.LM26:
+ 161 0092 2091 0000 		lds r18,switch_press
+ 162 0096 9091 0000 		lds r25,switch_state
+ 163 009a 8923      		and r24,r25
+ 164 009c 822B      		or r24,r18
+ 165 009e 8093 0000 		sts switch_press,r24
+ 166               	.LM27:
+ 167 00a2 8091 0000 		lds r24,switch_state
+ 168               	.LVL12:
+ 169 00a6 8C7F      		andi r24,lo8(-4)
+ 170 00a8 01F4      		brne .L10
+ 171               	.LM28:
+ 172 00aa 8CE3      		ldi r24,lo8(60)
+ 173 00ac 8093 0000 		sts rpt.1307,r24
+ 174               	.L10:
+ 175               	.LM29:
+ 176 00b0 8091 0000 		lds r24,rpt.1307
+ 177 00b4 8150      		subi r24,lo8(-(-1))
+ 178 00b6 8093 0000 		sts rpt.1307,r24
+ 179 00ba 8823      		tst r24
+ 180 00bc 01F4      		brne .L11
+ 181               	.LM30:
+ 182 00be 8AE0      		ldi r24,lo8(10)
+ 183 00c0 8093 0000 		sts rpt.1307,r24
+ 184               	.LM31:
+ 185 00c4 9091 0000 		lds r25,switch_rpt
+ 186 00c8 8091 0000 		lds r24,switch_state
+ 187 00cc 8C7F      		andi r24,lo8(-4)
+ 188 00ce 892B      		or r24,r25
+ 189 00d0 8093 0000 		sts switch_rpt,r24
+ 190               	.L11:
+ 191               	.LM32:
+ 192               	/* #APP */
+ 193               	 ;  123 "ruota/ruota.c" 1
+ 194 00d4 7894      		sei
+ 195               	 ;  0 "" 2
+ 196               	.LM33:
+ 197               	/* #NOAPP */
+ 198 00d6 CA01      		movw r24,r20
+ 199               	/* epilogue start */
+ 200 00d8 0895      		ret
+ 201               	.LFE5:
+ 203               	.global	get_switch_press
+ 205               	get_switch_press:
+ 206               	.LFB6:
+ 207               	.LM34:
+ 208               	.LVL13:
+ 209               	/* prologue: function */
+ 210               	/* frame size = 0 */
+ 211               	.LM35:
+ 212               	/* #APP */
+ 213               	 ;  133 "ruota/ruota.c" 1
+ 214 00da F894      		cli
+ 215               	 ;  0 "" 2
+ 216               	.LM36:
+ 217               	/* #NOAPP */
+ 218 00dc 9091 0000 		lds r25,switch_press
+ 219 00e0 8923      		and r24,r25
+ 220               	.LVL14:
+ 221               	.LM37:
+ 222 00e2 9091 0000 		lds r25,switch_press
+ 223 00e6 9827      		eor r25,r24
+ 224 00e8 9093 0000 		sts switch_press,r25
+ 225               	.LM38:
+ 226               	/* #APP */
+ 227               	 ;  136 "ruota/ruota.c" 1
+ 228 00ec 7894      		sei
+ 229               	 ;  0 "" 2
+ 230               	.LVL15:
+ 231               	/* epilogue start */
+ 232               	.LM39:
+ 233               	/* #NOAPP */
+ 234 00ee 0895      		ret
+ 235               	.LFE6:
+ 237               	.global	get_switch_rpt
+ 239               	get_switch_rpt:
+ 240               	.LFB7:
+ 241               	.LM40:
+ 242               	.LVL16:
+ 243               	/* prologue: function */
+ 244               	/* frame size = 0 */
+ 245               	.LM41:
+ 246               	/* #APP */
+ 247               	 ;  148 "ruota/ruota.c" 1
+ 248 00f0 F894      		cli
+ 249               	 ;  0 "" 2
+ 250               	.LM42:
+ 251               	/* #NOAPP */
+ 252 00f2 9091 0000 		lds r25,switch_rpt
+ 253 00f6 8923      		and r24,r25
+ 254               	.LVL17:
+ 255               	.LM43:
+ 256 00f8 9091 0000 		lds r25,switch_rpt
+ 257 00fc 9827      		eor r25,r24
+ 258 00fe 9093 0000 		sts switch_rpt,r25
+ 259               	.LM44:
+ 260               	/* #APP */
+ 261               	 ;  151 "ruota/ruota.c" 1
+ 262 0102 7894      		sei
+ 263               	 ;  0 "" 2
+ 264               	.LVL18:
+ 265               	/* epilogue start */
+ 266               	.LM45:
+ 267               	/* #NOAPP */
+ 268 0104 0895      		ret
+ 269               	.LFE7:
+ 271               	.global	get_switch_state
+ 273               	get_switch_state:
+ 274               	.LFB8:
+ 275               	.LM46:
+ 276               	.LVL19:
+ 277               	/* prologue: function */
+ 278               	/* frame size = 0 */
+ 279               	.LM47:
+ 280 0106 9091 0000 		lds r25,switch_state
+ 281               	.LM48:
+ 282 010a 8923      		and r24,r25
+ 283               	.LVL20:
+ 284               	/* epilogue start */
+ 285 010c 0895      		ret
+ 286               	.LFE8:
+ 288               	.global	get_switch_short
+ 290               	get_switch_short:
+ 291               	.LFB9:
+ 292               	.LM49:
+ 293               	.LVL21:
+ 294               	/* prologue: function */
+ 295               	/* frame size = 0 */
+ 296               	.LM50:
+ 297               	/* #APP */
+ 298               	 ;  169 "ruota/ruota.c" 1
+ 299 010e F894      		cli
+ 300               	 ;  0 "" 2
+ 301               	.LM51:
+ 302               	/* #NOAPP */
+ 303 0110 9091 0000 		lds r25,switch_state
+ 304               	.LBB8:
+ 305               	.LBB9:
+ 306               	.LM52:
+ 307               	/* #APP */
+ 308               	 ;  133 "ruota/ruota.c" 1
+ 309 0114 F894      		cli
+ 310               	 ;  0 "" 2
+ 311               	.LM53:
+ 312               	/* #NOAPP */
+ 313 0116 2091 0000 		lds r18,switch_press
+ 314 011a 9095      		com r25
+ 315 011c 8923      		and r24,r25
+ 316               	.LVL22:
+ 317 011e 8223      		and r24,r18
+ 318               	.LM54:
+ 319 0120 9091 0000 		lds r25,switch_press
+ 320 0124 9827      		eor r25,r24
+ 321 0126 9093 0000 		sts switch_press,r25
+ 322               	.LM55:
+ 323               	/* #APP */
+ 324               	 ;  136 "ruota/ruota.c" 1
+ 325 012a 7894      		sei
+ 326               	 ;  0 "" 2
+ 327               	.LVL23:
+ 328               	/* epilogue start */
+ 329               	/* #NOAPP */
+ 330               	.LBE9:
+ 331               	.LBE8:
+ 332               	.LM56:
+ 333 012c 0895      		ret
+ 334               	.LFE9:
+ 336               	.global	get_switch_long
+ 338               	get_switch_long:
+ 339               	.LFB10:
+ 340               	.LM57:
+ 341               	.LVL24:
+ 342               	/* prologue: function */
+ 343               	/* frame size = 0 */
+ 344 012e 982F      		mov r25,r24
+ 345               	.LVL25:
+ 346               	.LBB10:
+ 347               	.LBB11:
+ 348               	.LM58:
+ 349               	/* #APP */
+ 350               	 ;  148 "ruota/ruota.c" 1
+ 351 0130 F894      		cli
+ 352               	 ;  0 "" 2
+ 353               	.LM59:
+ 354               	/* #NOAPP */
+ 355 0132 8091 0000 		lds r24,switch_rpt
+ 356               	.LVL26:
+ 357 0136 9823      		and r25,r24
+ 358               	.LM60:
+ 359 0138 8091 0000 		lds r24,switch_rpt
+ 360 013c 8927      		eor r24,r25
+ 361 013e 8093 0000 		sts switch_rpt,r24
+ 362               	.LM61:
+ 363               	/* #APP */
+ 364               	 ;  151 "ruota/ruota.c" 1
+ 365 0142 7894      		sei
+ 366               	 ;  0 "" 2
+ 367               	/* #NOAPP */
+ 368               	.LBE11:
+ 369               	.LBE10:
+ 370               	.LBB12:
+ 371               	.LBB13:
+ 372               	.LM62:
+ 373               	/* #APP */
+ 374               	 ;  133 "ruota/ruota.c" 1
+ 375 0144 F894      		cli
+ 376               	 ;  0 "" 2
+ 377               	.LM63:
+ 378               	/* #NOAPP */
+ 379 0146 8091 0000 		lds r24,switch_press
+ 380               	.LVL27:
+ 381 014a 8923      		and r24,r25
+ 382               	.LM64:
+ 383 014c 9091 0000 		lds r25,switch_press
+ 384               	.LVL28:
+ 385 0150 9827      		eor r25,r24
+ 386 0152 9093 0000 		sts switch_press,r25
+ 387               	.LM65:
+ 388               	/* #APP */
+ 389               	 ;  136 "ruota/ruota.c" 1
+ 390 0156 7894      		sei
+ 391               	 ;  0 "" 2
+ 392               	.LVL29:
+ 393               	/* epilogue start */
+ 394               	/* #NOAPP */
+ 395               	.LBE13:
+ 396               	.LBE12:
+ 397               	.LM66:
+ 398 0158 0895      		ret
+ 399               	.LFE10:
+ 401               	.global	os_init_ruota
+ 403               	os_init_ruota:
+ 404               	.LFB2:
+ 405               	.LM67:
+ 406               	/* prologue: function */
+ 407               	/* frame size = 0 */
+ 408               	.LM68:
+ 409 015a 8DB1      		in r24,45-32
+ 410 015c 8F7C      		andi r24,lo8(-49)
+ 411 015e 8DB9      		out 45-32,r24
+ 412               	.LM69:
+ 413 0160 8EB1      		in r24,46-32
+ 414 0162 8063      		ori r24,lo8(48)
+ 415 0164 8EB9      		out 46-32,r24
+ 416               	.LM70:
+ 417 0166 6F98      		cbi 45-32,7
+ 418               	.LM71:
+ 419 0168 779A      		sbi 46-32,7
+ 420               	.LM72:
+ 421 016a 87B1      		in r24,39-32
+ 422 016c 837C      		andi r24,lo8(-61)
+ 423 016e 87B9      		out 39-32,r24
+ 424               	.LM73:
+ 425 0170 88B1      		in r24,40-32
+ 426 0172 8C63      		ori r24,lo8(60)
+ 427 0174 88B9      		out 40-32,r24
+ 428               	.LM74:
+ 429 0176 2698      		cbi 36-32,6
+ 430               	.LM75:
+ 431 0178 2E9A      		sbi 37-32,6
+ 432               	.LM76:
+ 433 017a 80E0      		ldi r24,lo8(gs(scan_encoder))
+ 434 017c 90E0      		ldi r25,hi8(gs(scan_encoder))
+ 435 017e 42E0      		ldi r20,lo8(2)
+ 436 0180 50E0      		ldi r21,hi8(2)
+ 437 0182 60E0      		ldi r22,hlo8(2)
+ 438 0184 70E0      		ldi r23,hhi8(2)
+ 439 0186 20E0      		ldi r18,lo8(0)
+ 440 0188 30E0      		ldi r19,hi8(0)
+ 441 018a 0E94 0000 		call os_add_task
+ 442               	.LM77:
+ 443 018e 80E0      		ldi r24,lo8(gs(scan_switches))
+ 444 0190 90E0      		ldi r25,hi8(gs(scan_switches))
+ 445 0192 4AE0      		ldi r20,lo8(10)
+ 446 0194 50E0      		ldi r21,hi8(10)
+ 447 0196 60E0      		ldi r22,hlo8(10)
+ 448 0198 70E0      		ldi r23,hhi8(10)
+ 449 019a 20E0      		ldi r18,lo8(0)
+ 450 019c 30E0      		ldi r19,hi8(0)
+ 451 019e 0E94 0000 		call os_add_task
+ 452               	/* epilogue start */
+ 453               	.LM78:
+ 454 01a2 0895      		ret
+ 455               	.LFE2:
+ 457               		.lcomm rpt.1307,1
+ 458               		.lcomm ct1.1306,1
+ 459               		.lcomm ct0.1305,1
+ 460               		.lcomm last.1273,1
+ 461               		.comm delta,1,1
+ 462               		.comm switch_state,1,1
+ 463               		.comm switch_press,1,1
+ 464               		.comm switch_rpt,1,1
+ 553               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 ruota.c
+C:\Users\Owen\AppData\Local\Temp/ccaB6Zhr.s:2      *ABS*:0000003f __SREG__
+C:\Users\Owen\AppData\Local\Temp/ccaB6Zhr.s:3      *ABS*:0000003e __SP_H__
+C:\Users\Owen\AppData\Local\Temp/ccaB6Zhr.s:4      *ABS*:0000003d __SP_L__
+C:\Users\Owen\AppData\Local\Temp/ccaB6Zhr.s:5      *ABS*:00000034 __CCP__
+C:\Users\Owen\AppData\Local\Temp/ccaB6Zhr.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\Owen\AppData\Local\Temp/ccaB6Zhr.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\Owen\AppData\Local\Temp/ccaB6Zhr.s:18     .text:00000000 scan_encoder
+C:\Users\Owen\AppData\Local\Temp/ccaB6Zhr.s:459    .bss:00000003 last.1273
+                            *COM*:00000001 delta
+C:\Users\Owen\AppData\Local\Temp/ccaB6Zhr.s:82     .text:0000003a os_enc_delta
+C:\Users\Owen\AppData\Local\Temp/ccaB6Zhr.s:115    .text:00000050 scan_switches
+                            *COM*:00000001 switch_state
+C:\Users\Owen\AppData\Local\Temp/ccaB6Zhr.s:458    .bss:00000002 ct0.1305
+C:\Users\Owen\AppData\Local\Temp/ccaB6Zhr.s:457    .bss:00000001 ct1.1306
+                            *COM*:00000001 switch_press
+                             .bss:00000000 rpt.1307
+                            *COM*:00000001 switch_rpt
+C:\Users\Owen\AppData\Local\Temp/ccaB6Zhr.s:205    .text:000000da get_switch_press
+C:\Users\Owen\AppData\Local\Temp/ccaB6Zhr.s:239    .text:000000f0 get_switch_rpt
+C:\Users\Owen\AppData\Local\Temp/ccaB6Zhr.s:273    .text:00000106 get_switch_state
+C:\Users\Owen\AppData\Local\Temp/ccaB6Zhr.s:290    .text:0000010e get_switch_short
+C:\Users\Owen\AppData\Local\Temp/ccaB6Zhr.s:338    .text:0000012e get_switch_long
+C:\Users\Owen\AppData\Local\Temp/ccaB6Zhr.s:403    .text:0000015a os_init_ruota
+
+UNDEFINED SYMBOLS
+os_add_task
+__do_clear_bss
