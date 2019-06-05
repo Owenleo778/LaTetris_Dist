@@ -1,13 +1,13 @@
 # What is this?
 A simple of game of Tetris to be played on the LaFortuna Board 
 
-# Instructions
+## Instructions
 
 - Use the left and right directions to move where the block is falling down.
 - You can press the up direction in order to rotate the block by 90° to the right (if possible).
 - You can press (and hold) the down direction in order to make the block fall faster.
 
-# Flash Instructions
+## Flash Instructions
 
 In order to be able to play, you need to 'flash' a .hex file of the game onto your board.
 
